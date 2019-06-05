@@ -1,0 +1,69 @@
+<div class="card" *ngIf="course$|async as course">
+  <h4 class="card-header">
+    Edit Course {{course.id}}
+  </h4>
+  <div class="card-body">
+    <form #form="ngForm" (ngSubmit)="update(form)">
+      <div class="form-group">
+        <label >Course ID</label>
+        <input type="text" class="form-control"
+               [ngModel]="course.id" readonly
+               name="id"
+        >
+      </div>
+      <div class="form-group">
+        <label >title</label>
+        <input type="text" class="form-control" readonly
+               [ngModel]="course.title" name="title"
+        >
+
+      </div>
+      <div class="form-group">
+        <label >price</label>
+        <input type="number" class="form-control" [ngModel]="course.price"
+               name="price" #price="ngModel" required appCoursePrice>
+        <div class="alert-danger"
+             *ngIf="price.touched && price.invalid">
+          <div *ngIf="price.errors.required">
+            Price is required
+          </div>
+          <div *ngIf="price.errors.minrange">
+            price can't be less than {{price.errors.minrange}}
+          </div>
+          <div *ngIf="price.errors.maxrange">
+            price can't be more than {{price.errors.maxrange}}
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label >Description</label>
+        <input type="text" class="form-control"
+               [ngModel]="course.description" required
+               name="description" #description="ngModel" >
+        <div class="alert-danger"
+             *ngIf="description.touched && description.invalid">
+          Description should be provided
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label >Lecturer</label>
+        <input type="text" class="form-control"
+               [(ngModel)]="course.lecturer"
+               name="lecturer" #lecturer="ngModel" required>
+        <div class="alert-danger"
+             *ngIf="lecturer.touched && lecturer.invalid">
+          Lecturer should be provided
+
+        </div>
+        <button type="submit"
+                class="btn btn-primary"
+                *ngIf="form.dirty && form.valid">update</button>
+        <button class="btn btn-primary" (click)="onCancel()">Cancel</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+

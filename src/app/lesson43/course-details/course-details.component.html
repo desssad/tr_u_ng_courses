@@ -1,0 +1,9 @@
+<div class="card" *ngIf="course$|async as course">
+  <h4 class="card-header">Course {{course.id}}Details</h4>
+  <div class="card-body">Id: {{course.id}}</div>
+  <div class="card-body">Title: {{course.title}}</div>
+  <div class="card-body">Description: {{course.description}}</div>
+  <div class="card-body">Price: {{course.price|currency:'ILS'}}</div>
+  <div class="card-body">Lecturer: {{course.lecturer}} </div>
+  <button class="btn btn-primary" (click)="onBack()">Back</button>
+</div>

@@ -1,0 +1,67 @@
+<div class="card">
+  <h4 class="card-header">Add New Course</h4>
+  <div class="card-body">
+    <form #form="ngForm" (ngSubmit)="add(form)">
+      <mat-form-field>
+        <input matInput type="text"
+          placeholder="id"
+          ngModel name="id" #stid="ngModel" required> <!--        pattern="\+d"-->
+        <mat-error *ngIf="stid.errors?.required">
+          Id is not reqired
+        </mat-error>
+        <mat-error *ngIf="stid.errors?.pattern">
+          Id should be only digits
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="text"
+               placeholder="title"
+               ngModel
+               name="title"
+               required>
+        <mat-icon matSuffix>title</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          type="text"
+          placeholder="price"
+          matInput ngModel
+          name="price"
+          required
+        >
+        <mat-error>Price is not correct</mat-error>
+        <mat-icon matSuffix>money_off</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          type="description"
+          placeholder="description"
+          matInput ngModel
+          name="description"
+          required
+        >
+        <mat-error>Description is not required</mat-error>
+        <mat-icon matSuffix>description</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          type="lecturer"
+          placeholder="lecturer"
+          matInput ngModel
+          name="lecturer"
+          required
+        >
+        <mat-error>Description is not required</mat-error>
+        <mat-icon matSuffix>people</mat-icon>
+      </mat-form-field>
+      <hr>
+      <button type="submit" [disabled]="form.invalid">
+        Add Course
+      </button>
+    </form>
+  </div>
+</div>
